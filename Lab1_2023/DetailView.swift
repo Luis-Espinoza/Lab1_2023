@@ -10,13 +10,14 @@ import SwiftUI
 struct DetailView: View {
     @State private var description = ""
     @State private var favourite = false
+    var colour: Color
     var body: some View {
         VStack {
             Image(systemName: "tortoise.fill")
                 .resizable(resizingMode: .stretch)
                 .imageScale(.large)
                 .foregroundColor(.accentColor)
-                .background(favourite ? Color.yellow : Color.white)
+                .background(favourite ? colour : Color.white)
             Toggle(isOn: $favourite) {
                 Text("Favourite")
             }
@@ -28,6 +29,6 @@ struct DetailView: View {
 
 struct DetailView_Previews: PreviewProvider {
     static var previews: some View {
-        DetailView()
+        DetailView(colour: Color.yellow)
     }
 }

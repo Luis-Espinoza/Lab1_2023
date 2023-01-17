@@ -9,14 +9,15 @@ import SwiftUI
 
 struct MainView: View {
     @State private var showSettings = false
+    @State var colour = Color.yellow
     var body: some View {
         NavigationStack() {
             VStack {
                 if showSettings {
-                    SettingsView()
+                    SettingsView(colour: $colour)
                 }
                 else {
-                    DetailView()
+                    DetailView(colour: colour)
                 }
             }
             .navigationBarItems(
