@@ -21,7 +21,18 @@ struct DetailView: View {
             Toggle(isOn: $favourite) {
                 Text("Favourite")
             }
-            TextEditor(text: $description)
+            TextEditor(text: Binding(
+                get: {
+                    description
+                },
+                set: {
+                    newValue in
+                    if newValue.count <= 150 {
+                        description = newValue
+                    }
+                }
+            ))
+            Text(String(description.count))
         }
         .padding()
     }
