@@ -9,12 +9,17 @@ import SwiftUI
 
 struct ContentView: View {
     @State private var description = ""
+    @State private var favourite = false
     var body: some View {
         VStack {
             Image(systemName: "tortoise.fill")
                 .resizable(resizingMode: .stretch)
                 .imageScale(.large)
                 .foregroundColor(.accentColor)
+                .background(favourite ? Color.yellow : Color.white)
+            Toggle(isOn: $favourite) {
+                Text("Favourite")
+            }
             TextEditor(text: $description)
         }
         .padding()
