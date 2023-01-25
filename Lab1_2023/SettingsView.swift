@@ -28,6 +28,7 @@ struct SettingsView: View {
                 .padding()
                 .font(.title2)
                 .fontWeight(.semibold)
+                .accessibilityIdentifier("BackgroundColorPicker")
             
                 Stepper(value: Binding(
                     get: {
@@ -43,6 +44,7 @@ struct SettingsView: View {
                     Text("Max Character Count: \(maxChars)")
                         .font(.title2)
                         .fontWeight(.semibold)
+                        .accessibilityIdentifier("MaxCountStepper")
                 }.padding(15)
         }
     }

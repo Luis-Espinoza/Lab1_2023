@@ -33,6 +33,7 @@ struct MainView: View {
                             Image(systemName: showSettings ? "house" : "gear")
                         }
                     )
+                    .accessibilityIdentifier("NavigationButton")
             )
         }
     }

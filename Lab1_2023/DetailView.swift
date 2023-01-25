@@ -21,11 +21,13 @@ struct DetailView: View {
                 .imageScale(.large)
                 .foregroundColor(.accentColor)
                 .background(favourite ? colour : defaultColor)
+                .accessibilityIdentifier("DetailImage")
             
             Toggle(isOn: $favourite) {
                 Text("Favourite")
                     .font(.title2)
                     .fontWeight(.semibold)
+                    .accessibilityIdentifier("FavouriteToggle")
             }
             
             TextEditor(text: Binding(
@@ -42,10 +44,12 @@ struct DetailView: View {
             )
             .font(.title2)
             .fontWeight(.regular)
+            .accessibilityIdentifier("DetailTextEditor")
             
             Text(String(description.count) + "/" + String(maxChars))
                 .font(.title2)
                 .fontWeight(.semibold)
+                .accessibilityIdentifier("DetailText")
         }
         .padding()
     }

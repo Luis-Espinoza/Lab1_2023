@@ -22,20 +22,31 @@ final class Lab1_2023UITests: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
 
-    func testExample() throws {
-        // UI tests must launch the application that they test.
+    func testCharCount() throws {
         let app = XCUIApplication()
         app.launch()
-
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+        
+        let detailText = app.staticTexts["DetailText"]
+        XCTAssertEqual(detailText.label, "0/150")
+        
+        let detailTextEditor = app.textViews["DetailTextEditor"]
+        detailTextEditor.tap()
+        
+        let keyH = app.keys["H"]
+        keyH.tap()
+        XCTAssertTrue(detailText.waitForExistence(timeout: 5))
+        XCTAssertEqual(detailText.label, "1/150")
+        
+        let keyi = app.keys["i"]
+        keyi.tap()
+        XCTAssertEqual(detailText.label, "2/150")
     }
-
-    func testLaunchPerformance() throws {
-        if #available(macOS 10.15, iOS 13.0, tvOS 13.0, watchOS 7.0, *) {
-            // This measures how long it takes to launch your application.
-            measure(metrics: [XCTApplicationLaunchMetric()]) {
-                XCUIApplication().launch()
-            }
-        }
+    
+    func testCharNotGreater() throws {
+        let app = XCUIApplication()
+        app.launch()
+        
+        let detailText = app.staticTexts["DetailText"]
+        
     }
 }
