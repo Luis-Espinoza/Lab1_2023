@@ -46,7 +46,60 @@ final class Lab1_2023UITests: XCTestCase {
         let app = XCUIApplication()
         app.launch()
         
-        let detailText = app.staticTexts["DetailText"]
+        let detailTextEditor = app.textViews["DetailTextEditor"]
+        detailTextEditor.tap()
         
+        let keyS = app.keys["S"]
+        keyS.tap()
+        
+        let keys = app.keys["s"]
+        
+        for _ in 1...153 {
+            keys.tap()
+        }
+        
+        let detailText = app.staticTexts["DetailText"]
+        XCTAssertTrue(detailText.waitForExistence(timeout: 5))
+        XCTAssertEqual(detailText.label, "150/150")
+        
+    }
+    
+    func testThree() throws {
+        let app = XCUIApplication()
+        app.launch()
+        
+        let toggle = app.buttons["NavigationButton"]
+        toggle.tap()
+        
+        for _ in 1...33 {
+            app.steppers["MaxCountStepper"].buttons["Decrement"].tap()
+        }
+        
+        app.terminate()
+        app.launch()
+        
+        let detailText = app.staticTexts["DetailText"]
+        XCTAssertEqual(detailText.label, "0/10")
+        
+        let detailTextEditor = app.textViews["DetailTextEditor"]
+        detailTextEditor.tap()
+        
+        let keyS = app.keys["S"]
+        keyS.tap()
+        let keys = app.keys["s"]
+        
+        for _ in 1...12 {
+            keys.tap()
+        }
+        
+        toggle.tap()
+        
+        for _ in 1...33 {
+            app.steppers["MaxCountStepper"].buttons["Increment"].tap()
+        }
+        
+        for _ in 1...15 {
+            app.steppers["MaxCountStepper"].buttons["Decrement"].tap()
+        }
     }
 }

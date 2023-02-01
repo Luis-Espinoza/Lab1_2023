@@ -44,8 +44,8 @@ struct SettingsView: View {
                     Text("Max Character Count: \(maxChars)")
                         .font(.title2)
                         .fontWeight(.semibold)
-                        .accessibilityIdentifier("MaxCountStepper")
-                }.padding(15)
+                        
+                }.padding(15).accessibilityIdentifier("MaxCountStepper")
         }
     }
 }
