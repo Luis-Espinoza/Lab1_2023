@@ -15,7 +15,8 @@ struct DetailView: View {
     var colour: Color
     var maxChars: Int
     
-    var inventoryItem: InventoryItem
+    @Binding var inventoryItem: InventoryItem
+    
     var body: some View {
         VStack {
             Image(systemName: inventoryItem.image)
@@ -34,12 +35,12 @@ struct DetailView: View {
             
             TextEditor(text: Binding(
                 get: {
-                    description
+                    inventoryItem.description
                 },
                 set: {
                     newValue in
                     if newValue.count <= maxChars {
-                        description = newValue
+                        inventoryItem.description = newValue
                     }
                 }
             )
@@ -58,8 +59,8 @@ struct DetailView: View {
 }
 
 struct DetailView_Previews: PreviewProvider {
-    static var inventoryItems = InventoryItems()
+    @State static var inventoryItems = InventoryItems()
     static var previews: some View {
-        DetailView(colour: Color.yellow, maxChars: 150, inventoryItem: inventoryItems.entries[0])
+        DetailView(colour: Color.yellow, maxChars: 150, inventoryItem: $inventoryItems.entries[0])
     }
 }
