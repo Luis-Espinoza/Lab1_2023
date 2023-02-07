@@ -14,9 +14,11 @@ struct DetailView: View {
     let defaultFaveColor = Color.yellow
     var colour: Color
     var maxChars: Int
+    
+    var inventoryItem: InventoryItem
     var body: some View {
         VStack {
-            Image(systemName: "tortoise.fill")
+            Image(systemName: inventoryItem.image)
                 .resizable(resizingMode: .stretch)
                 .imageScale(.large)
                 .foregroundColor(.accentColor)
@@ -56,7 +58,8 @@ struct DetailView: View {
 }
 
 struct DetailView_Previews: PreviewProvider {
+    static var inventoryItems = InventoryItems()
     static var previews: some View {
-        DetailView(colour: Color.yellow, maxChars: 150)
+        DetailView(colour: Color.yellow, maxChars: 150, inventoryItem: inventoryItems.entries[0])
     }
 }

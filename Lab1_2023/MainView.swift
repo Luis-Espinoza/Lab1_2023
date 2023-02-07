@@ -27,7 +27,7 @@ struct MainView: View {
                     List($inventoryItems.entries) {
                         $inventoryItem in
                         NavigationLink(
-                            destination: DetailView(colour: colour, maxChars: maxChars)
+                            destination: DetailView(colour: colour, maxChars: maxChars, inventoryItem: inventoryItem)
                         ) {
                             RowView(inventoryItem: inventoryItem)
                         }
