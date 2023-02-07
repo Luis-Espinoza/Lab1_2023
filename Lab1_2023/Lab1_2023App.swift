@@ -9,9 +9,11 @@ import SwiftUI
 
 @main
 struct Lab1_2023App: App {
+    
+    @StateObject var inventoryItems = InventoryItems()
     var body: some Scene {
         WindowGroup {
-            MainView()
+            MainView().environmentObject(inventoryItems)
         }
     }
 }
