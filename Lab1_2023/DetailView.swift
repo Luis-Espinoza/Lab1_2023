@@ -49,7 +49,7 @@ struct DetailView: View {
             .fontWeight(.regular)
             .accessibilityIdentifier("DetailTextEditor")
             
-            Text(String(description.count) + "/" + String(maxChars))
+            Text(String(inventoryItem.description.count) + "/" + String(maxChars))
                 .font(.title2)
                 .fontWeight(.semibold)
                 .accessibilityIdentifier("DetailText")
