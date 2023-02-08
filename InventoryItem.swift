@@ -11,9 +11,11 @@ struct InventoryItem: Identifiable {
     let id = UUID()
     var image: String
     var description: String
+    var toggle: Bool
     
-    init(image: String, description: String) {
+    init(image: String, description: String, toggle: Bool) {
         self.image = image
         self.description = description
+        self.toggle = toggle
     }
 }

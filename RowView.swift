@@ -9,6 +9,8 @@ import SwiftUI
 
 struct RowView: View {
     var inventoryItem: InventoryItem
+    let defaultColor = Color.white
+    var colour: Color
     
     var body: some View {
         HStack {
@@ -16,6 +18,7 @@ struct RowView: View {
                 .resizable()
                 .scaledToFit()
                 .frame(width: 100, height: 100, alignment: .leading)
+                .background(inventoryItem.toggle ? colour : defaultColor)
             Text(inventoryItem.description)
                 .frame(width: 200, height: 100, alignment: .leading)
         }
@@ -26,6 +29,6 @@ struct RowView: View {
 struct RowView_Previews: PreviewProvider {
     static var inventoryItems = InventoryItems()
     static var previews: some View {
-        RowView(inventoryItem: inventoryItems.entries[0])
+        RowView( inventoryItem: inventoryItems.entries[0], colour: Color.yellow)
     }
 }

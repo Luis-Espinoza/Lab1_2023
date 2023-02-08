@@ -12,7 +12,7 @@ class InventoryItems: ObservableObject {
     
     init() {
         entries = [InventoryItem]()
-        entries.append(InventoryItem(image: "hare", description: "Hare"))
-        entries.append(InventoryItem(image: "tortoise", description: "Tortoise"))
+        entries.append(InventoryItem(image: "hare", description: "Hare", toggle: false))
+        entries.append(InventoryItem(image: "tortoise", description: "Tortoise", toggle: false))
     }
 }

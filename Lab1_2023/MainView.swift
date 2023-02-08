@@ -29,7 +29,7 @@ struct MainView: View {
                         NavigationLink(
                             destination: DetailView(colour: colour, maxChars: maxChars, inventoryItem: $inventoryItem)
                         ) {
-                            RowView(inventoryItem: inventoryItem)
+                            RowView(inventoryItem: inventoryItem, colour: colour)
                         }
                     }
                 }

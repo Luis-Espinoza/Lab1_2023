@@ -23,10 +23,10 @@ struct DetailView: View {
                 .resizable(resizingMode: .stretch)
                 .imageScale(.large)
                 .foregroundColor(.accentColor)
-                .background(favourite ? colour : defaultColor)
+                .background(inventoryItem.toggle ? colour : defaultColor)
                 .accessibilityIdentifier("DetailImage")
             
-            Toggle(isOn: $favourite) {
+            Toggle(isOn: $inventoryItem.toggle) {
                 Text("Favourite")
                     .font(.title2)
                     .fontWeight(.semibold)
