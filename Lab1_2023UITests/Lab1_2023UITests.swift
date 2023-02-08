@@ -43,8 +43,8 @@ final class Lab1_2023UITests: XCTestCase {
         keyi.tap()
         XCTAssertEqual(detailText.label, "6/150")
         
-        let backButton = app.buttons["Back"]
-        backButton.tap()
+        let inventoryButton = app.buttons["Inventory"]
+        inventoryButton.tap()
     }
     
     func testCharNotGreater() throws {
@@ -69,8 +69,8 @@ final class Lab1_2023UITests: XCTestCase {
         XCTAssertTrue(detailText.waitForExistence(timeout: 5))
         XCTAssertEqual(detailText.label, "150/150")
         
-        let backButton = app.buttons["Back"]
-        backButton.tap()
+        let inventoryButton = app.buttons["Inventory"]
+        inventoryButton.tap()
         
     }
     
@@ -104,8 +104,8 @@ final class Lab1_2023UITests: XCTestCase {
             keys.tap()
         }
         
-        let backButton = app.buttons["Back"]
-        backButton.tap()
+        let inventoryButton = app.buttons["Inventory"]
+        inventoryButton.tap()
         toggle.tap()
         
         for _ in 1...33 {
@@ -128,11 +128,20 @@ final class Lab1_2023UITests: XCTestCase {
         
         XCTAssertEqual(favouriteToggle.value as? String, "1") //1 == enabled
         
-        let backButton = app.buttons["Back"]
-        backButton.tap()
+        let inventoryButton = app.buttons["Inventory"]
+        inventoryButton.tap()
         
         let secondEntry = app.collectionViews.buttons.element(boundBy: 1)
         secondEntry.tap()
         XCTAssertEqual(favouriteToggle.value as? String, "0") //1 == enabled
+    }
+    
+    func testFive() throws {
+        let app = XCUIApplication()
+        app.launch()
+        
+        let navigationBars = app.navigationBars
+        
+        navigationBars["Inventory"].buttons["PlusButton"].tap()
     }
 }

@@ -34,8 +34,24 @@ struct MainView: View {
                     }
                 }
             }
-            .navigationBarItems(
-                trailing:
+            .navigationBarTitle(Text("Inventory"))
+            .toolbar{
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    if !showSettings {
+                        Button(
+                            action: {
+                                withAnimation {
+                                    let item = InventoryItem(image: "ladybug", description: "Ladybug", toggle: false)
+                                    inventoryItems.entries.insert(item, at: 0)
+                                }
+                            }
+                        ) {
+                            Image(systemName: "plus")
+                        }
+                        .accessibilityIdentifier("PlusButton")
+                    }
+                }
+                ToolbarItem(placement: .bottomBar){
                     Button(
                         action: {
                             showSettings.toggle()
@@ -45,7 +61,8 @@ struct MainView: View {
                         }
                     )
                     .accessibilityIdentifier("NavigationButton")
-            )
+                }
+            }
         }
     }
 }
