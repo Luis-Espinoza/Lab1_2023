@@ -31,6 +31,13 @@ struct MainView: View {
                         ) {
                             RowView(inventoryItem: inventoryItem, colour: colour)
                         }
+                        .swipeActions(edge: .trailing) {
+                            Button(role: .destructive) {
+                                inventoryItems.entries.removeAll(where: {$0.id == inventoryItem.id})
+                            } label: {
+                                Label("Delete", systemImage: "trash")
+                            }
+                        }
                     }
                 }
             }
@@ -70,7 +77,7 @@ struct MainView: View {
 struct MainView_Previews: PreviewProvider {
     static var previews: some View {
         ForEach(["iPad (10th generation)", "iPhone 14 Pro"], id:\.self) {deviceName in MainView()
-                .previewDevice(PreviewDevice(rawValue: deviceName)).environmentObject(InventoryItems())
+                .previewDevice(PreviewDevice(rawValue: deviceName)).environmentObject(InventoryItems(previewMode: true))
         }
     }
 }

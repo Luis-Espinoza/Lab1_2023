@@ -136,12 +136,20 @@ final class Lab1_2023UITests: XCTestCase {
         XCTAssertEqual(favouriteToggle.value as? String, "0") //1 == enabled
     }
     
-    func testFive() throws {
+    func testAddItems() throws {
         let app = XCUIApplication()
         app.launch()
         
         let navigationBars = app.navigationBars
         
         navigationBars["Inventory"].buttons["PlusButton"].tap()
+    }
+    
+    func testDeleteItems() throws {
+        let app = XCUIApplication()
+        app.launch()
+        
+        app.collectionViews.buttons.firstMatch.swipeLeft(velocity: .slow)
+        app.collectionViews.buttons["Delete"].tap()
     }
 }

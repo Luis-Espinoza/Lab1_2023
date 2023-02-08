@@ -7,8 +7,8 @@
 
 import SwiftUI
 
-struct InventoryItem: Identifiable {
-    let id = UUID()
+struct InventoryItem: Identifiable, Codable {
+    var id = UUID()
     var image: String
     var description: String
     var toggle: Bool
