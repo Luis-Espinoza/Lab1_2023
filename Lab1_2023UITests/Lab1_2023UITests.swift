@@ -152,4 +152,33 @@ final class Lab1_2023UITests: XCTestCase {
         app.collectionViews.buttons.firstMatch.swipeLeft(velocity: .slow)
         app.collectionViews.buttons["Delete"].tap()
     }
+    
+    func testSavingLoading() throws {
+        let app = XCUIApplication()
+        app.launch()
+        
+        let navigationBars = app.navigationBars
+        
+        navigationBars["Inventory"].buttons["PlusButton"].tap()
+        navigationBars["Inventory"].buttons["PlusButton"].tap()
+        
+        app.collectionViews.buttons.firstMatch.tap()
+        
+        let favouriteToggle = app.switches["Favourite"]
+        favouriteToggle.tap()
+        
+        let inventoryButton = app.buttons["Inventory"]
+        inventoryButton.tap()
+        
+        XCUIDevice.shared.press(.home)
+        sleep(1)
+        
+        app.terminate()
+        app.launch()
+        
+        app.collectionViews.buttons.firstMatch.swipeLeft(velocity: .slow)
+        app.collectionViews.buttons["Delete"].tap()
+        app.collectionViews.buttons.firstMatch.swipeLeft(velocity: .slow)
+        app.collectionViews.buttons["Delete"].tap()
+    }
 }
