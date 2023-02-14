@@ -26,10 +26,14 @@ final class Lab1_2023UITests: XCTestCase {
         let app = XCUIApplication()
         app.launch()
         
+        let navigationBars = app.navigationBars
+        
+        navigationBars["Inventory"].buttons["PlusButton"].tap()
+        
         app.collectionViews.buttons.firstMatch.tap()
         
         let detailText = app.staticTexts["DetailText"]
-        XCTAssertEqual(detailText.label, "4/150")
+        XCTAssertEqual(detailText.label, "7/150")
         
         let detailTextEditor = app.textViews["DetailTextEditor"]
         detailTextEditor.tap()
@@ -37,11 +41,11 @@ final class Lab1_2023UITests: XCTestCase {
         let keyH = app.keys["H"]
         keyH.tap()
         XCTAssertTrue(detailText.waitForExistence(timeout: 5))
-        XCTAssertEqual(detailText.label, "5/150")
+        XCTAssertEqual(detailText.label, "8/150")
         
         let keyi = app.keys["i"]
         keyi.tap()
-        XCTAssertEqual(detailText.label, "6/150")
+        XCTAssertEqual(detailText.label, "9/150")
         
         let inventoryButton = app.buttons["Inventory"]
         inventoryButton.tap()
@@ -50,6 +54,10 @@ final class Lab1_2023UITests: XCTestCase {
     func testCharNotGreater() throws {
         let app = XCUIApplication()
         app.launch()
+        
+        let navigationBars = app.navigationBars
+        
+        navigationBars["Inventory"].buttons["PlusButton"].tap()
         
         app.collectionViews.buttons.firstMatch.tap()
         
@@ -88,10 +96,14 @@ final class Lab1_2023UITests: XCTestCase {
         app.terminate()
         app.launch()
         
+        let navigationBars = app.navigationBars
+        
+        navigationBars["Inventory"].buttons["PlusButton"].tap()
+        
         app.collectionViews.buttons.firstMatch.tap()
         
         let detailText = app.staticTexts["DetailText"]
-        XCTAssertEqual(detailText.label, "4/10")
+        XCTAssertEqual(detailText.label, "7/10")
         
         let detailTextEditor = app.textViews["DetailTextEditor"]
         detailTextEditor.tap()
@@ -121,6 +133,11 @@ final class Lab1_2023UITests: XCTestCase {
         let app = XCUIApplication()
         app.launch()
         
+        let navigationBars = app.navigationBars
+        
+        navigationBars["Inventory"].buttons["PlusButton"].tap()
+        navigationBars["Inventory"].buttons["PlusButton"].tap()
+        
         app.collectionViews.buttons.firstMatch.tap()
         
         let favouriteToggle = app.switches["Favourite"]
@@ -142,15 +159,27 @@ final class Lab1_2023UITests: XCTestCase {
         
         let navigationBars = app.navigationBars
         
+        XCTAssertEqual(app.collectionViews.buttons.count as Int, 0)
+        
         navigationBars["Inventory"].buttons["PlusButton"].tap()
+        
+        XCTAssertEqual(app.collectionViews.buttons.count as Int, 1)
     }
     
     func testDeleteItems() throws {
         let app = XCUIApplication()
         app.launch()
         
+        let navigationBars = app.navigationBars
+        
+        navigationBars["Inventory"].buttons["PlusButton"].tap()
+        
+        XCTAssertEqual(app.collectionViews.buttons.count as Int, 1)
+        
         app.collectionViews.buttons.firstMatch.swipeLeft(velocity: .slow)
         app.collectionViews.buttons["Delete"].tap()
+        
+        XCTAssertEqual(app.collectionViews.buttons.count as Int, 0)
     }
     
     func testSavingLoading() throws {
@@ -159,8 +188,12 @@ final class Lab1_2023UITests: XCTestCase {
         
         let navigationBars = app.navigationBars
         
+        XCTAssertEqual(app.collectionViews.buttons.count as Int, 0)
+        
         navigationBars["Inventory"].buttons["PlusButton"].tap()
         navigationBars["Inventory"].buttons["PlusButton"].tap()
+        
+        XCTAssertEqual(app.collectionViews.buttons.count as Int, 2)
         
         app.collectionViews.buttons.firstMatch.tap()
         
@@ -176,9 +209,16 @@ final class Lab1_2023UITests: XCTestCase {
         app.terminate()
         app.launch()
         
+        XCTAssertEqual(app.collectionViews.buttons.count as Int, 2)
+        
         app.collectionViews.buttons.firstMatch.swipeLeft(velocity: .slow)
         app.collectionViews.buttons["Delete"].tap()
         app.collectionViews.buttons.firstMatch.swipeLeft(velocity: .slow)
         app.collectionViews.buttons["Delete"].tap()
+        
+        XCTAssertEqual(app.collectionViews.buttons.count as Int, 0)
+        
+        XCUIDevice.shared.press(.home)
+        sleep(1)
     }
 }
