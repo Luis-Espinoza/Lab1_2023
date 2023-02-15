@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Photos
 
 struct DetailView: View {
     @State private var description = ""
@@ -16,6 +17,10 @@ struct DetailView: View {
     var maxChars: Int
     
     @Binding var inventoryItem: InventoryItem
+    
+    @State var pickerVisible = false
+    @State var showCameraAlert = false
+    @State var imageSource = UIImagePickerController.SourceType.camera
     
     var body: some View {
         VStack {
@@ -55,11 +60,29 @@ struct DetailView: View {
                 .accessibilityIdentifier("DetailText")
         }
         .padding()
+        .navigationBarItems(trailing:
+                                Button(action: {
+            AVCaptureDevice.requestAccess(for: AVMediaType.video) { response in
+                if response && UIImagePickerController.isSourceTypeAvailable(UIImagePickerController.SourceType.camera) {
+                    self.showCameraAlert = false
+                    self.imageSource = UIImagePickerController.SourceType.camera
+                    self.pickerVisible.toggle()
+                } else {
+                    self.showCameraAlert = true
+                }
+            }
+        }) {
+            Image(systemName: "camera")
+        }
+            .alert(isPresented: $showCameraAlert) {
+                Alert(title: Text("Error"), message: Text("Camera not available"), dismissButton: .default(Text("OK")))
+            }
+        )
     }
 }
 
 struct DetailView_Previews: PreviewProvider {
-    @State static var inventoryItems = InventoryItems()
+    @State static var inventoryItems = InventoryItems(previewMode: true)
     static var previews: some View {
         DetailView(colour: Color.yellow, maxChars: 150, inventoryItem: $inventoryItems.entries[0])
     }
