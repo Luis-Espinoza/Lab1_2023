@@ -12,7 +12,8 @@ struct InventoryItem: Identifiable, Codable {
     var image: UIImage {
         get {
             UIImage(data: self.imageAsData) ?? UIImage (systemName: "questionmark")!
-        } set {
+        }
+        set {
             self.imageAsData = newValue.pngData() ?? UIImage(systemName: "questionmark")!.pngData()!
         }
     }
@@ -27,8 +28,9 @@ struct InventoryItem: Identifiable, Codable {
         
     }
     
-    init(image: UIImage, description: String) {
-        self.image = image
+    init(image: UIImage, description: String, toggle: Bool) {
+        self.imageAsData = image.pngData() ?? UIImage(systemName: "questionmark")!.pngData()!
         self.description = description
+        self.toggle = toggle
     }
 }

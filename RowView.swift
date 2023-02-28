@@ -14,7 +14,7 @@ struct RowView: View {
     
     var body: some View {
         HStack {
-            Image(systemName: inventoryItem.image)
+            Image(uiImage: inventoryItem.image)
                 .resizable()
                 .scaledToFit()
                 .frame(width: 100, height: 100, alignment: .leading)
