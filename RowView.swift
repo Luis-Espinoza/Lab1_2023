@@ -18,7 +18,7 @@ struct RowView: View {
                 .resizable()
                 .scaledToFit()
                 .frame(width: 100, height: 100, alignment: .leading)
-                .background(inventoryItem.toggle ? colour : defaultColor)
+                .border(inventoryItem.toggle ? colour : defaultColor, width: 10)
             Text(inventoryItem.description)
                 .frame(width: 200, height: 100, alignment: .leading)
         }

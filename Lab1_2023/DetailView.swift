@@ -30,7 +30,7 @@ struct DetailView: View {
                     .resizable(resizingMode: .stretch)
                     .imageScale(.large)
                     .foregroundColor(.accentColor)
-                    .background(inventoryItem.toggle ? colour : defaultColor)
+                    .border(inventoryItem.toggle ? colour : defaultColor, width: 10)
                     .accessibilityIdentifier("DetailImage")
                     .scaledToFit()
                     .gesture(TapGesture(count: 1).onEnded({ value in
