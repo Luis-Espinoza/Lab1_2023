@@ -21,6 +21,7 @@ struct DetailView: View {
     @State var pickerVisible = false
     @State var showCameraAlert = false
     @State var imageSource = UIImagePickerController.SourceType.camera
+    @State var showLibraryAlert = false
     
     var body: some View {
         ZStack {
@@ -32,6 +33,20 @@ struct DetailView: View {
                     .background(inventoryItem.toggle ? colour : defaultColor)
                     .accessibilityIdentifier("DetailImage")
                     .scaledToFit()
+                    .gesture(TapGesture(count: 1).onEnded({ value in
+                        PHPhotoLibrary.requestAuthorization({ status in
+                            if status == .authorized {
+                                self.showLibraryAlert = false
+                                self.imageSource = UIImagePickerController.SourceType.photoLibrary
+                                self.pickerVisible.toggle()
+                            } else {
+                                self.showLibraryAlert = true
+                            }
+                        })
+                    }))
+                    .alert(isPresented: $showLibraryAlert) {
+                        Alert(title: Text("Error"), message: Text("Photo library access is needed to add photos of inventory items"), dismissButton: .default(Text("OK")))
+                    }
                 
                 Toggle(isOn: $inventoryItem.toggle) {
                     Text("Favourite")
